@@ -1,52 +1,50 @@
 {
+  "version": "0.0.3",
   "name": "@gershy/lilac-network",
-  "version": "0.0.2",
-  "description": "TODO",
-  "keywords": [
-    "TODO"
-  ],
-  "author": "Gershom Maes",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gershyNpm/lilacNetwork.git"
+    "url": "git+https://github.com/gershyNpm/lilacNetwork.git",
+    "type": "git"
   },
   "bugs": {
     "url": "https://github.com/gershyNpm/lilacNetwork/issues"
   },
   "homepage": "https://github.com/gershyNpm/lilacNetwork#readme",
+  "description": "TODO",
+  "keywords": [
+    "TODO"
+  ],
+  "author": "Gershom Maes",
   "license": "ISC",
   "peerDependencies": {
-    "@gershy/clearing": "^0.0.36"
+    "@gershy/clearing": "^0.0.41"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "esbuild": "^0.28.0"
   },
   "dependencies": {
-    "@gershy/lilac": "^0.0.18",
-    "@gershy/util-phrasing": "^0.0.5"
+    "@gershy/lilac": "^0.0.23",
+    "@gershy/logger": "^0.0.9",
+    "@gershy/util-phrasing": "^0.0.6"
   },
   "type": "module",
   "files": [
     "cmp"
   ],
-  "sideEffects": false,
-  "types": "./cmp/mjs/main.d.ts",
   "exports": {
     ".": {
-      "import": "./cmp/mjs/main.js",
+      "import": "./cmp/esm/main.js",
       "require": "./cmp/cjs/main.js"
     }
   },
   "scripts": {
     "test": "npm run ts.check && npx tsx ./src/main.test.ts",
     "ts.check": "npx tsc --noEmit",
-    "build.cjs": "tsc -p build/tsconfig.cjs.json",
-    "build.mjs": "tsc -p build/tsconfig.mjs.json",
-    "build": "node ./build/act.js removeCmp && npm run build.cjs && npm run build.mjs && node ./build/act.js finalizeExportVariants",
     "git.pub": "npm run test && git add --all && git commit -m \"automated\" && git push",
     "npm.login": "npm login",
-    "npm.pub": "npm run test && npm run build && npm publish --access public"
+    "npm.pub": "npm run test && npm run build && npm publish --access public",
+    "npm.cmp": "npm run ts.check && node ./build/act.js cmp"
   }
 }
