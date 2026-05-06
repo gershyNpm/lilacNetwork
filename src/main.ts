@@ -2,8 +2,6 @@ import '@gershy/clearing';
 import { type Context, Flower, PetalTerraform, Soil } from '@gershy/lilac';
 import phrasing from '@gershy/util-phrasing';
 
-// TODO: HEEERE3 some imports fail bc lilac has exports but not named main.ts / *.main.ts...
-
 export class Network extends Flower {
   
   // Reducing aws costs using vpc is a bit tricky. The main concepts are:

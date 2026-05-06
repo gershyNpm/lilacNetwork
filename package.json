@@ -1,38 +1,35 @@
 {
-  "version": "0.0.3",
   "name": "@gershy/lilac-network",
+  "version": "0.0.4",
+  "author": "Gershom Maes",
+  "description": "TODO",
+  "keywords": [
+    "TODO"
+  ],
   "repository": {
-    "url": "git+https://github.com/gershyNpm/lilacNetwork.git",
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/gershyNpm/lilacNetwork.git"
   },
   "bugs": {
     "url": "https://github.com/gershyNpm/lilacNetwork/issues"
   },
   "homepage": "https://github.com/gershyNpm/lilacNetwork#readme",
-  "description": "TODO",
-  "keywords": [
-    "TODO"
+  "type": "module",
+  "files": [
+    "cmp"
   ],
-  "author": "Gershom Maes",
   "license": "ISC",
   "peerDependencies": {
     "@gershy/clearing": "^0.0.41"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "esbuild": "^0.28.0"
+    "@types/node": "^24.10.1"
   },
   "dependencies": {
-    "@gershy/lilac": "^0.0.23",
+    "@gershy/lilac": "^0.0.27",
     "@gershy/logger": "^0.0.9",
     "@gershy/util-phrasing": "^0.0.6"
   },
-  "type": "module",
-  "files": [
-    "cmp"
-  ],
   "exports": {
     ".": {
       "import": "./cmp/esm/main.js",
@@ -41,10 +38,6 @@
   },
   "scripts": {
     "test": "npm run ts.check && npx tsx ./src/main.test.ts",
-    "ts.check": "npx tsc --noEmit",
-    "git.pub": "npm run test && git add --all && git commit -m \"automated\" && git push",
-    "npm.login": "npm login",
-    "npm.pub": "npm run test && npm run build && npm publish --access public",
-    "npm.cmp": "npm run ts.check && node ./build/act.js cmp"
+    "ts.check": "npx tsc --noEmit"
   }
 }
