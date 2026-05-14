@@ -1,6 +1,6 @@
 {
   "name": "@gershy/lilac-network",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Gershom Maes",
   "description": "TODO",
   "keywords": [
@@ -26,7 +26,7 @@
     "@types/node": "^24.10.1"
   },
   "dependencies": {
-    "@gershy/lilac": "^0.0.28",
+    "@gershy/lilac": "^0.0.29",
     "@gershy/logger": "^0.0.9",
     "@gershy/util-phrasing": "^0.0.6"
   },

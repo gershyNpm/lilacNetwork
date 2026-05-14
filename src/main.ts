@@ -27,12 +27,12 @@ export class Network extends Flower {
   //   3. Lambdas which require public internet or interface service go *outside* the vpc - they
   //      can still interact with aws services via their public regional endpoints!
   
-  private name: string;
-  private freeBinDb: boolean;
-  private freeDocDb: boolean;
-  private cheapEmail: boolean;
-  private cheapQueue: boolean;
-  private expensiveW3: boolean;
+  protected name: string;
+  protected freeBinDb: boolean;
+  protected freeDocDb: boolean;
+  protected cheapEmail: boolean;
+  protected cheapQueue: boolean;
+  protected expensiveW3: boolean;
   
   constructor(args: { name: string } & { [K in 'freeBinDb' | 'freeDocDb' | 'cheapEmail' | 'cheapQueue' | 'expensiveW3']: boolean }) {
     
