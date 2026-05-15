@@ -1,6 +1,6 @@
 {
   "name": "@gershy/lilac-network",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "Gershom Maes",
   "description": "TODO",
   "keywords": [
@@ -20,15 +20,15 @@
   ],
   "license": "ISC",
   "peerDependencies": {
-    "@gershy/clearing": "^0.0.41"
+    "@gershy/clearing": "^0.0.42"
   },
   "devDependencies": {
     "@types/node": "^24.10.1"
   },
   "dependencies": {
-    "@gershy/lilac": "^0.0.30",
-    "@gershy/logger": "^0.0.9",
-    "@gershy/util-phrasing": "^0.0.6"
+    "@gershy/lilac": "^0.0.31",
+    "@gershy/logger": "^0.0.10",
+    "@gershy/util-phrasing": "^0.0.7"
   },
   "exports": {
     ".": {
