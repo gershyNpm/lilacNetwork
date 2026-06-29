@@ -13,8 +13,8 @@ export class Network extends Flower {
   // - It's cheaper for lamdbas to interact with gateway-type services via a vpc (data never leaves
   //   aws), vs the public internet
   // - But, once a lambda is in the vpc it no longer has public internet access
-  //   - It can only gain public internet access via a nat setup, which is expensive - ~$32/mo,
-  //     plus a lot more depending on data load
+  //   - It can only gain public internet access via a nat setup, which is pricier - ~$32/mo,
+  //     plus significant scaling costs depending on data load
   //   - And any aws services it uses apart from ddb/s3 will require an interface, which is cheap
   //     but not free
   // - Overall, for a lambda that interacts with aws gateway services and other service types, the
@@ -93,6 +93,7 @@ export class Network extends Flower {
     });
     
     const securityGroup = addPetal(new PetalTerraform.Resource('awsSecurityGroup', name, {
+      
       name: `${this.name}SecurityGroup`,
       vpcId: vpc.ref('id'),
       
