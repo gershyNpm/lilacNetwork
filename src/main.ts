@@ -1,5 +1,5 @@
 import '@gershy/clearing';
-import { type Context, Flower, PetalTerraform, Soil } from '@gershy/lilac';
+import { Flower, PetalTerraform, Soil } from '@gershy/lilac';
 import phrasing from '@gershy/util-phrasing';
 
 export class Network extends Flower {
@@ -27,6 +27,7 @@ export class Network extends Flower {
   //   3. Lambdas which require public internet or interface service go *outside* the vpc - they
   //      can still interact with aws services via their public regional endpoints!
   
+  protected region: string;
   protected name: string;
   protected freeBinDb: boolean;
   protected freeDocDb: boolean;
@@ -34,9 +35,14 @@ export class Network extends Flower {
   protected cheapQueue: boolean;
   protected expensiveW3: boolean;
   
-  constructor(args: { name: string } & { [K in 'freeBinDb' | 'freeDocDb' | 'cheapEmail' | 'cheapQueue' | 'expensiveW3']: boolean }) {
+  constructor(args: { soil?: Soil.Base, region?: string, name: string } & { [K in 'freeBinDb' | 'freeDocDb' | 'cheapEmail' | 'cheapQueue' | 'expensiveW3']: boolean }) {
     
     super();
+    
+    const region = args.region ?? args.soil?.getRegion();
+    if (!region) throw Error('region and soil missing');
+    
+    this.region = region;
     this.name = args.name;
     this.freeBinDb   = args.freeBinDb;
     this.freeDocDb   = args.freeDocDb;
@@ -56,7 +62,7 @@ export class Network extends Flower {
     };
   }
   
-  async computePetals(ctx: Context & { soil: Soil.Base }) {
+  async computePetals() {
     
     const entities: PetalTerraform.Base[] = [];
     const addPetal = (ent: PetalTerraform.Base) => { entities.push(ent); return ent; };
@@ -116,7 +122,7 @@ export class Network extends Flower {
       if (active)
         addPetal(new PetalTerraform.Resource('awsVpcEndpoint', name, {
           vpcId: vpc.ref('id'),
-          serviceName: `com.amazonaws.${ctx.soil.getRegion()}.${awsSubdomain}`,
+          serviceName: `com.amazonaws.${this.region}.${awsSubdomain}`,
           vpcEndpointType: phrasing('camel->kamel', 'gateway'), // Gateways are free!
           routeTableIds: [ vpc.ref('defaultRouteTableId') ]
         }));
@@ -131,7 +137,7 @@ export class Network extends Flower {
       if (active)
         addPetal(new PetalTerraform.Resource('awsVpcEndpoint', name, {
           vpcId: vpc.ref('id'),
-          serviceName: `com.amazonaws.${ctx.soil.getRegion()}.${awsSubdomain}`,
+          serviceName: `com.amazonaws.${this.region}.${awsSubdomain}`,
           vpcEndpointType: phrasing('camel->kamel', 'interface'), // Interfaces are cheap, but not free
           subnetIds: privateSubnets.map(ps => ps.subnet.ref('id')),
           securityGroupIds: [ securityGroup.ref('id') ],

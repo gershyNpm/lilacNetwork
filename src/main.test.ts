@@ -1,7 +1,5 @@
 import { assertEqual, testRunner } from '../build/utils.test.ts';
 import { Network } from './main.ts';
-import { tempFact } from '@gershy/disk';
-import Logger from '@gershy/logger';
 import './main.ts';
 
 // Type testing
@@ -23,6 +21,7 @@ testRunner([
     
     // TODO: Implement!
     const network = new Network({
+      region: 'ca-central-1',
       name: 'testNetwork',
       freeBinDb: true,
       freeDocDb: false, // true,
@@ -31,27 +30,7 @@ testRunner([
       expensiveW3: false // TODO: Need to test this; it's currently not implemented
     });
     
-    const fact = tempFact.kid([ Math.random().toString(36).slice(2) ]);
-    const petals = await network.getPetals({
-      
-      name: 'testCtx',
-      logger: Logger.dummy,
-      fact,
-      patioFact: fact.kid([ 'patio' ]),
-      shedFact: fact.kid([ 'shed' ]),
-      maturity: 'm0',
-      debug: true,
-      pfx: 'tzt',
-      
-      soil: {
-        getRegion: () => 'ca-central-1'
-      } as any
-      // soil: new Soil.Base({
-      //   logger: Logger.dummy,
-      //   registry: new Registry({}),
-      // })
-      
-    });
+    const petals = await network.getPetals();
     const tfBlocks = await Promise.all(petals.map(p => p.getResult()));
     
     assertEqual(
