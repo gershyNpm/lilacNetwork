@@ -1,5 +1,5 @@
 import '@gershy/clearing';
-import { Flower, PetalTerraform, Soil } from '@gershy/lilac';
+import { Flower, PetalTerraform, Garden } from '@gershy/lilac';
 import phrasing from '@gershy/util-phrasing';
 
 export class Network extends Flower {
@@ -35,11 +35,11 @@ export class Network extends Flower {
   protected cheapQueue: boolean;
   protected expensiveW3: boolean;
   
-  constructor(args: { soil?: Soil.Base, region?: string, name: string } & { [K in 'freeBinDb' | 'freeDocDb' | 'cheapEmail' | 'cheapQueue' | 'expensiveW3']: boolean }) {
+  constructor(args: { garden?: Garden<any, any>, region: string, name: string } & { [K in 'freeBinDb' | 'freeDocDb' | 'cheapEmail' | 'cheapQueue' | 'expensiveW3']: boolean }) {
     
-    super();
+    super(args);
     
-    const region = args.region ?? args.soil?.getRegion();
+    const region = args.region ?? this.garden.defaults.region ?? null;
     if (!region) throw Error('region and soil missing');
     
     this.region = region;

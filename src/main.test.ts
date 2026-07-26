@@ -21,6 +21,7 @@ testRunner([
     
     // TODO: Implement!
     const network = new Network({
+      garden: {} as any,
       region: 'ca-central-1',
       name: 'testNetwork',
       freeBinDb: true,
