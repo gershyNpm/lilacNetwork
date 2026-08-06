@@ -21,7 +21,7 @@ export class Network extends Flower {
   //   savings from adding vpc will typically be outweighed by nat/interface charges unless aws
   //   service data usage is very high (e.g. lots of public internet io with ddb/s3), and other
   //   public internet data + interface service use is low
-  // - So the typical plan should be:
+  // - So the *typical* plan should be:
   //   1. Never use nat
   //   2. Lambdas which only use aws gateway services (most lambdas!) should go in the vpc
   //   3. Lambdas which require public internet or interface service go *outside* the vpc - they
@@ -50,7 +50,9 @@ export class Network extends Flower {
     this.expensiveW3 = args.expensiveW3;
     
   }
-
+  
+  public getFlowerId() { return null; } // Can consider setting this to enable VPC admin api access...
+  
   public getConfig() {
     return {
       binDb: this.freeBinDb,
@@ -145,7 +147,7 @@ export class Network extends Flower {
 
     if (this.expensiveW3) {
       
-      throw Error('logic missing');
+      throw Error('script missing');
       
       /* Need to provision a lot in this case...
         
