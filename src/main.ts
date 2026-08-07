@@ -39,9 +39,10 @@ export class Network extends Flower {
     
     super(args);
     
-    this.region = args.region ?? this.garden.defaults.region ?? null;
-    if (!this.region) throw Error('region missing');
+    const region = args.region ?? this.garden.defaults.region ?? null;
+    if (!region) throw Error('region missing');
     
+    this.region = region;
     this.name = args.name;
     this.freeBinDb   = args.freeBinDb;
     this.freeDocDb   = args.freeDocDb;
